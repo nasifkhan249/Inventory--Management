@@ -12,6 +12,7 @@ router.post("/ProfileUpdate",AuthVerifyMiddleware,UserController.ProfileUpdate);
 router.get("/ProfileDetails",AuthVerifyMiddleware,UserController.ProfileDetails);
 router.get("/RecoveryVerifyEmail/:email",UserController.RecoveryVerifyEmail);
 router.get("/RecoveryVerifyOTP/:email/:otp",UserController.RecoveryVerifyOTP);
+router.post("/RecoveryResetPass",UserController.RecoveryVerifyPass);
 
 
 module.exports=router;

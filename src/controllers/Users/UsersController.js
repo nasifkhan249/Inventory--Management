@@ -1,6 +1,7 @@
 const UserCreateService = require("../../services/user/UserCreateService");
 const UserDetailsService = require("../../services/user/UserDetailsService");
 const UserLoginService = require("../../services/user/UserLoginService");
+const UserResetPassService = require("../../services/user/UserResetPassService");
 const UserUpdateService = require("../../services/user/UserUpdateService");
 const UserVerifyEmailService = require("../../services/user/UserVerifyEmailService");
 const UserVerifyOtpService = require("../../services/user/UserVerifyOtpService");
@@ -33,5 +34,11 @@ exports.RecoveryVerifyEmail=async(req,res)=>{
 
 exports.RecoveryVerifyOTP=async(req,res)=>{
     let result=await UserVerifyOtpService(req);
+    res.status(200).json(result);
+}
+
+
+exports.RecoveryVerifyPass=async(req,res)=>{
+    let result=await UserResetPassService(req);
     res.status(200).json(result);
 }
