@@ -2,6 +2,8 @@ const CreateService =require("../../services/customer/CreateService");
 const CustomersModel =require( "../../models/Customers/CustomersModel");
 const UpdateService = require("../../services/customer/UpdateService");
 const ListService = require("../../services/customer/ListService");
+const DropDownService = require("../../services/customer/DropDownService");
+const DetailsByIDService = require("../../services/customer/DetailsByIDService");
 
 
 exports.CreateCustomer=async (req,res)=>{
@@ -21,6 +23,11 @@ exports.CustomersList=async (req,res)=>{
 }
 
 exports.CustomersDropDown=async (req,res)=>{
-    let result=await ListService(req,CustomersModel);
+    let result=await DropDownService(req,CustomersModel);
+    res.status(200).json(result);
+}
+
+exports.CustomersDetailsByID=async (req,res)=>{
+    let result=await DetailsByIDService(req,CustomersModel);
     res.status(200).json(result);
 }

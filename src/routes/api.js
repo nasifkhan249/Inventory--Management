@@ -3,7 +3,9 @@ const UserController=require("../controllers/Users/UsersController");
 const BrandController=require("../controllers/Brands/BrandsController");
 const CategoryController=require("../controllers/Categories/CategoriesController");
 const CustomerController=require("../controllers/Customers/CustomersController");
+const SupplierController = require("../controllers/Suppliers/SuppliersController");
 const AuthVerifyMiddleware = require('../middlewares/AuthVerifyMiddleware');
+
 
 const router=express.Router();
 
@@ -40,7 +42,17 @@ router.get("/category-details/:id",AuthVerifyMiddleware,CategoryController.Categ
 router.post("/create-customer",AuthVerifyMiddleware,CustomerController.CreateCustomer);
 router.post("/update-customer/:id",AuthVerifyMiddleware,CustomerController.UpdateCustomers);
 router.get("/customer-list/:PageNo/:PerPage/:search",AuthVerifyMiddleware,CustomerController.CustomersList);
+router.get("/drop-down-customer",AuthVerifyMiddleware,CustomerController.CustomersDropDown);
+router.get("/customer-details/:id",AuthVerifyMiddleware,CustomerController.CustomersDetailsByID);
 //Customer Profile
+
+//Supplier Profile
+router.post("/create-supplier",AuthVerifyMiddleware,SupplierController.CreateSuppliers);
+router.post("/update-supplier/:id",AuthVerifyMiddleware,SupplierController.UpdateSuppliers);
+router.get("/supplier-list/:PageNO/:PerPage/:search",AuthVerifyMiddleware,SupplierController.SupplierList);
+router.get("/drop-down-supplier",AuthVerifyMiddleware,SupplierController.SuppliersDropDown);
+router.get("/supplier-details/:id",AuthVerifyMiddleware,SupplierController.SuppliersDetailsByID);
+//Supplier Profile
 
 
 module.exports=router;
