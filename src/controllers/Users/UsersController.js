@@ -6,10 +6,10 @@ const UserUpdateService = require("../../services/user/UserUpdateService");
 const UserVerifyEmailService = require("../../services/user/UserVerifyEmailService");
 const UserVerifyOtpService = require("../../services/user/UserVerifyOtpService");
 
-exports.Registration=async(req,res)=>{
-    let result=await UserCreateService(req);
+exports.Registration = async (req, res) => {
+    let result = await UserCreateService(req);
     res.status(200).json(result);
-}
+};
 
 
 exports.Login=async(req,res)=>{

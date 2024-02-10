@@ -1,29 +1,23 @@
-const OTPsModel = require("../../models/Users/OTPSModel");
-const UsersModel = require("../../models/Users/UsersModel");
-const SendEmailUtility = require("../../uitility/SendEmailUtility");
-
-const UserVerifyEmailService=async(req)=>{
+const OTPModel=require("../../models/Users/OTPSModel");
+const UsersModel=require("../../models/Users/UsersModel");
+const SendEmailUtility=require("../../uitility/SendEmailUtility");
+const UserVerifyEmailService=async (req)=>{
     try {
         let email=req.params.email;
-        let OTPCode=Math.floor(100000+Math.random()*900000);
-        let EmailText="Your verification code is  "+OTPCode;
-        let EmailSubject="Inventory PIN Verification"
+        let otp=Math.floor(100000+Math.random()*900000);
 
         let UserCount=await UsersModel.aggregate([{$match:{email:email}},{$count:"total"}]);
 
         if(UserCount.length>0){
-
-            await OTPsModel.updateOne({email:email},{$set:{otp:OTPCode}},{upsert:true});
-
-            let SendEmail=await SendEmailUtility(email,EmailText,EmailSubject);
-
-            return {status:"success",data:SendEmail}
-        } else{
-            return {status: "fail", data: "No User Found"}
+            await OTPModel.updateOne({email:email},{$set:{otp:otp}},{upsert:true});
+            let sendEmail=await SendEmailUtility(email,"You'r Verification code is = "+otp,"Inventory PIN Verification");
+            return {status:"success",data:sendEmail}
+        }else{
+            return {status:"fail",data:"No user found"}
         }
-    } catch (error) {
-        return {status: "fail", data: error.toString()};
+    }catch (e) {
+        console.log(e);
+        return {status:"fail",data:e}
     }
 }
-
-module.exports=UserVerifyEmailService
+module.exports=UserVerifyEmailService;

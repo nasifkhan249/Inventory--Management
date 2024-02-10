@@ -1,18 +1,19 @@
-const jwt =require("jsonwebtoken");
-
-module.exports=async(req,res,next)=>{
+const jwt=require("jsonwebtoken");
+const AuthVerifyMiddleware=async (req,res,next)=>{
     try {
-        let Token=req.headers['token'];
-        jwt.verify(Token,"12345",(err,decoded)=>{
+        let token=req.headers['token'];
+        jwt.verify(token,'12345',(err,decoded)=>{
             if(err){
-                res.status(200).json({status:"unauthorized"});
+                res.status(400).json({status:"unauthorized"})
             }else{
                 let email=decoded['data'];
                 req.headers.email=email;
-                next()
+                next();
             }
         })
-    } catch (error) {
-        return {status:"fail",data:error.toString()};
+    }catch (e) {
+        return {status:"fail",data:e}
     }
-}
+};
+
+module.exports=AuthVerifyMiddleware

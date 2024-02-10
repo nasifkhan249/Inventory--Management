@@ -1,25 +1,24 @@
-const OTPsModel = require("../../models/Users/OTPSModel");
+const OTPModel=require("../../models/Users/OTPSModel");
 
-
-const UserVerifyOtpService=async(req)=>{
+const UserVerifyOtpService=async (req)=>{
     try {
         let email=req.params.email;
-        let OTPCode=req.params.otp;
+        let otp=req.params.otp;
         let status=0;
-        let statusUpdate=1;
+        let statusUpdated=1;
 
-        let OTPCount=await OTPsModel.aggregate([{$match:{email,otp:OTPCode,status:status}},{$count: "total"}])
-
+        let OTPCount=await OTPModel.aggregate([{$match:{email:email,otp:otp,status:status}},{$count:"total"}]);
         if(OTPCount.length>0){
-
-            let OTPUpdate=await OTPsModel.updateOne({email:email,otp:OTPCode,status:status},{$set:{status:statusUpdate}},{upsert:true});
-            return {status:"success",data:OTPUpdate}
-        }else{
-            return  {status: "fail", data: "Invalid OTP Code"}
+            let updateOtp=await OTPModel.updateOne({email:email,otp:otp},{$set:{status:statusUpdated}},{upsert:true});
+            return {status:"success",data:"OTP Verify Successful"}
         }
-    } catch (error) {
-        return {status: "fail", data: error.toString()}
+        else{
+            return {status:"fail",data:"Invalid Otp"}
+        }
+    }catch (e) {
+        console.log(e)
+        return {status:"fail",data:e}
     }
 }
 
-module.exports=UserVerifyOtpService;
+module.exports=UserVerifyOtpService

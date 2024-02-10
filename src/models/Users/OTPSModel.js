@@ -5,6 +5,6 @@ const DataSchema=mongoose.Schema({
     status:{type:Number,default:0},
     createdDate:{type:Date,default:Date.now()}
 },{versionKey:false});
-const OTPsModel=mongoose.model('otps',DataSchema);
-module.exports=OTPsModel;
+const OTPModel=mongoose.model('otps',DataSchema);
+module.exports=OTPModel;
 

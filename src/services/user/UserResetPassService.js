@@ -1,25 +1,26 @@
-const OTPsModel = require("../../models/Users/OTPSModel");
-const UsersModel = require("../../models/Users/UsersModel");
+const OTPModel=require("../../models/Users/OTPSModel");
+const UsersModel=require('../../models/Users/UsersModel');
 
-const UserResetPassService=async(req)=>{
+const UserResetPassService=async (req)=>{
     try {
         let email=req.body['email'];
-        let OTPCode=req.body['otp'];
+        let otp=req.body['otp'];
         let NewPass=req.body['password'];
-        let statusUpdate=1;
-        let statusCount=0;
+        let status=0;
+        let statusUpdated=1;
+        let code=0;
 
-        let OTPUsedCount=await OTPsModel.aggregate([{$match:{email:email,otp:OTPCode,status:statusUpdate}},{$count:"total"}]);
-
-        if(OTPUsedCount.length>0){
-            let PassUpdate=await UsersModel.updateOne({email:email},{$set:{password:NewPass}},{upsert:true});
-            await OTPsModel.updateOne({email:email},{$set:{status:statusCount,otp:0}},{upsert:true});
-            return {status: "success", data: PassUpdate}
+        let OTPCount=await OTPModel.aggregate([{$match:{email:email,otp:otp,status:statusUpdated}},{$count:"total"}]);
+        if(OTPCount.length>0){
+            await UsersModel.updateOne({email:email},{$set:{password:NewPass}},{upsert:true});
+            await OTPModel.updateOne({email:email,otp:otp},{$set:{status:status,otp:code}},{upsert:true});
+            return{status:"success",data:"Password Update Successful"}
         }else{
-            return {status: "fail", data: "Invalid Request"}
+            return{status:"fail",data:"Invalid Request"}
         }
-    } catch (error) {
-        return {status: "fail", data: error.toString()}
+    }catch (e) {
+        console.log(e);
+        return{status:"fail",data:e}
     }
 }
 
