@@ -4,6 +4,9 @@ const BrandController=require("../controllers/Brands/BrandsController");
 const CategoryController=require("../controllers/Categories/CategoriesController");
 const CustomerController=require("../controllers/Customers/CustomersController");
 const SupplierController = require("../controllers/Suppliers/SuppliersController");
+const ExpensesTypeController=require("../controllers/Expenses/ExpenseTypesController");
+const ExpensesController=require("../controllers/Expenses/ExpensesController");
+const ProductsController=require("../controllers/Products/ProductsController");
 const AuthVerifyMiddleware = require('../middlewares/AuthVerifyMiddleware');
 
 
@@ -55,4 +58,29 @@ router.get("/supplier-details/:id",AuthVerifyMiddleware,SupplierController.Suppl
 //Supplier Profile
 
 
+
+//Expenses Types Profile
+router.post('/create-expense-types',AuthVerifyMiddleware,ExpensesTypeController.CreateExpenseTypes);
+router.post('/update-expense-types/:id',AuthVerifyMiddleware,ExpensesTypeController.UpdateExpenseTypes)
+router.get("/expense-types-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesList);
+router.get("/drop-down-expense-types",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDropDown);
+router.get("/expense-types-details/:id",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDetailsByID);
+//Expenses Types Profile
+
+//Expenses Profile
+router.post('/create-expense',AuthVerifyMiddleware,ExpensesController.CreateExpenses);
+router.post('/update-expense/:id',AuthVerifyMiddleware,ExpensesController.UpdateExpenses)
+router.get("/expense-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ExpensesController.ListExpenses);
+router.get("/drop-down-expense",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDropDown);
+router.get("/expense-details/:id",AuthVerifyMiddleware,ExpensesController.DetailsExpenses);
+//Expenses Profile
+
+
+// Products Profile
+router.post("/create-products",AuthVerifyMiddleware,ProductsController.CreateProducts);
+router.post("/update-products/:id",AuthVerifyMiddleware,ProductsController.UpdateProducts);
+router.get("/product-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ProductsController.ProductsList);
+router.get("/product-detail/:id",AuthVerifyMiddleware,ProductsController.ProductsDetailsByID);
+router.get("/product-drop-down",AuthVerifyMiddleware,ProductsController.ProductsDropDown);
+// Products Profile
 module.exports=router;
