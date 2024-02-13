@@ -7,6 +7,9 @@ const SupplierController = require("../controllers/Suppliers/SuppliersController
 const ExpensesTypeController=require("../controllers/Expenses/ExpenseTypesController");
 const ExpensesController=require("../controllers/Expenses/ExpensesController");
 const ProductsController=require("../controllers/Products/ProductsController");
+const PurchasesController=require("../controllers/Purchases/PurchasesController");
+const SalesController=require("../controllers/Sales/SalesController");
+const ReturnController=require("../controllers/Returns/ReturnsController");
 const AuthVerifyMiddleware = require('../middlewares/AuthVerifyMiddleware');
 
 
@@ -83,4 +86,21 @@ router.get("/product-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,Product
 router.get("/product-detail/:id",AuthVerifyMiddleware,ProductsController.ProductsDetailsByID);
 router.get("/product-drop-down",AuthVerifyMiddleware,ProductsController.ProductsDropDown);
 // Products Profile
+
+// Purchases Profile
+router.post("/create-purchases",AuthVerifyMiddleware,PurchasesController.PurchasesCreate);
+router.get("/purchases-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,PurchasesController.PurchasesList);
+router.get("/purchases-delete/:id",AuthVerifyMiddleware,PurchasesController.PurchasesDelete);
+// Purchases Profile
+
+// Sales Profile
+router.post("/create-sales",AuthVerifyMiddleware,SalesController.CreateSales);
+router.get("/sales-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,SalesController.SalesList);
+// Sales Profile
+
+// Return Profile
+router.post("/create-return",AuthVerifyMiddleware,ReturnController.CreateReturn);
+router.get("/return-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ReturnController.ReturnsList);
+router.get("/return-delete/:id",AuthVerifyMiddleware,ReturnController.ReturnsDelete);
+// Return Profile
 module.exports=router;
