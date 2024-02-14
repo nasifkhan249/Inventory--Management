@@ -76,6 +76,7 @@ router.post('/update-expense/:id',AuthVerifyMiddleware,ExpensesController.Update
 router.get("/expense-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ExpensesController.ListExpenses);
 router.get("/drop-down-expense",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDropDown);
 router.get("/expense-details/:id",AuthVerifyMiddleware,ExpensesController.DetailsExpenses);
+router.get("/expenses-delete/:id",AuthVerifyMiddleware,ExpensesController.DeleteExpenses)
 //Expenses Profile
 
 
@@ -96,6 +97,7 @@ router.get("/purchases-delete/:id",AuthVerifyMiddleware,PurchasesController.Purc
 // Sales Profile
 router.post("/create-sales",AuthVerifyMiddleware,SalesController.CreateSales);
 router.get("/sales-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,SalesController.SalesList);
+router.get("/sale-delete/:id",AuthVerifyMiddleware,SalesController.SalesDelete);
 // Sales Profile
 
 // Return Profile
