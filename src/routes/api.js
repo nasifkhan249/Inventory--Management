@@ -33,6 +33,7 @@ router.post("/update-brand/:id",AuthVerifyMiddleware,BrandController.UpdateBrand
 router.get("/list-brand/:pageNo/:perPage/:searchValue",AuthVerifyMiddleware,BrandController.BrandList);
 router.get("/drop-down-brand",AuthVerifyMiddleware,BrandController.BrandDropDown);
 router.get("/brand-details/:id",AuthVerifyMiddleware,BrandController.BrandDetailsByID);
+router.get("/brand-delete/:id",AuthVerifyMiddleware,BrandController.BrandDelete);
 //Brand Profile
 
 //Category Profile
@@ -41,6 +42,7 @@ router.post("/update-category/:id",AuthVerifyMiddleware,CategoryController.Updat
 router.get("/list-category/:PageNo/:PerPage/:searchValue",AuthVerifyMiddleware,CategoryController.CategoryList);
 router.get("/drop-down-brand",AuthVerifyMiddleware,CategoryController.BrandDropDown);
 router.get("/category-details/:id",AuthVerifyMiddleware,CategoryController.CategoryDetailsByID);
+router.get("/category-delete/:id",AuthVerifyMiddleware,CategoryController.CategoryDelete);
 //Category Profile
 
 
@@ -68,6 +70,7 @@ router.post('/update-expense-types/:id',AuthVerifyMiddleware,ExpensesTypeControl
 router.get("/expense-types-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesList);
 router.get("/drop-down-expense-types",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDropDown);
 router.get("/expense-types-details/:id",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDetailsByID);
+router.get("/expense-types-delete/:id",AuthVerifyMiddleware,ExpensesTypeController.ExpenseTypesDelete);
 //Expenses Types Profile
 
 //Expenses Profile
