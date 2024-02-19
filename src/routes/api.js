@@ -10,6 +10,7 @@ const ProductsController=require("../controllers/Products/ProductsController");
 const PurchasesController=require("../controllers/Purchases/PurchasesController");
 const SalesController=require("../controllers/Sales/SalesController");
 const ReturnController=require("../controllers/Returns/ReturnsController");
+const ReportController=require("../controllers/Reports/ReportController");
 const AuthVerifyMiddleware = require('../middlewares/AuthVerifyMiddleware');
 
 
@@ -52,6 +53,7 @@ router.post("/update-customer/:id",AuthVerifyMiddleware,CustomerController.Updat
 router.get("/customer-list/:PageNo/:PerPage/:search",AuthVerifyMiddleware,CustomerController.CustomersList);
 router.get("/drop-down-customer",AuthVerifyMiddleware,CustomerController.CustomersDropDown);
 router.get("/customer-details/:id",AuthVerifyMiddleware,CustomerController.CustomersDetailsByID);
+router.get("/customer-delete/:id",AuthVerifyMiddleware,CustomerController.CustomerDelete);
 //Customer Profile
 
 //Supplier Profile
@@ -60,6 +62,7 @@ router.post("/update-supplier/:id",AuthVerifyMiddleware,SupplierController.Updat
 router.get("/supplier-list/:PageNO/:PerPage/:search",AuthVerifyMiddleware,SupplierController.SupplierList);
 router.get("/drop-down-supplier",AuthVerifyMiddleware,SupplierController.SuppliersDropDown);
 router.get("/supplier-details/:id",AuthVerifyMiddleware,SupplierController.SuppliersDetailsByID);
+router.get("/supplier-delete/:id",AuthVerifyMiddleware,SupplierController.SuppliersDelete);
 //Supplier Profile
 
 
@@ -89,6 +92,7 @@ router.post("/update-products/:id",AuthVerifyMiddleware,ProductsController.Updat
 router.get("/product-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ProductsController.ProductsList);
 router.get("/product-detail/:id",AuthVerifyMiddleware,ProductsController.ProductsDetailsByID);
 router.get("/product-drop-down",AuthVerifyMiddleware,ProductsController.ProductsDropDown);
+router.get("/product-delete/:id",AuthVerifyMiddleware,ProductsController.ProductsDelete);
 // Products Profile
 
 // Purchases Profile
@@ -108,4 +112,9 @@ router.post("/create-return",AuthVerifyMiddleware,ReturnController.CreateReturn)
 router.get("/return-list/:pageNo/:perPage/:search",AuthVerifyMiddleware,ReturnController.ReturnsList);
 router.get("/return-delete/:id",AuthVerifyMiddleware,ReturnController.ReturnsDelete);
 // Return Profile
+
+
+//Report Profile
+router.post("/expense-report/:id",AuthVerifyMiddleware,ReportController.Expense)
+//Report Profile
 module.exports=router;
